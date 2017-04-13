@@ -38,7 +38,7 @@ Download and reference the release DLL file in your project.
 
 In your Startup.cs file add the following namespace.
 ```C#
-using AspNETCore.Impersonation;
+using AspNetCore.Impersonation;
 ```
 
 In your Startup.cs file add the following code below to the function 'Configure'. 
@@ -54,7 +54,7 @@ Download and reference the release DLL file in your project.
 
 In your Startup.cs file add the following namespace.
 ```C#
-using AspNETCore.Impersonation;
+using AspNetCore.Impersonation;
 ```
 
 In your Startup.cs file add the following code below to the function 'Configure', it must be right at the start of the function before any of the pipeline calls.
