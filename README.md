@@ -1,6 +1,6 @@
-# ASP.Net Core Impersonation
+# ASP.NET Core Impersonation
 
-**This library is for the ASP.Net Core (.Net Framework 4.6+) version only, this is because its using the advapi32.dll for the impersonation.**
+**This library is for the ASP.NET Core (.NET Framework 4.6+) version only, this is because its using the advapi32.dll for the impersonation.**
 
 The library gives the ability to impersonate a user at either a function level or a middleware level. If the impersonation configuration file does not exist it will simply run the function and middleware as the underlining user. 
 This can be quite useful if you want to impersonate at a local dev level but then when you push to product you want it to run as the application pool user. To achieve this the only thing, you need to do is to exclude publishing the impersonation configuration file to the product server or delete the file on it. By doing this
@@ -26,8 +26,8 @@ To Get started you will need to build the configuration file "impersonation.json
 
 Note: if the is_enabled flag is set to false it will not attempt to run the impersonation with the credentials supplied.
 
-## Middleware Function
-The middleware function allows you to impersonate a different user when you run a supplied function in ASP.Net Core. 
+## Impersonation Function
+The Impersonation function allows you to impersonate a different user when you run a supplied function in ASP.NET Core. 
 
 The main purpose of the function is to help with loading possible configuration and caching functions in the Startup.cs file without having to create a middleware plugin to try and achieve this. 
 using a middleware plugin to try and load a onetime configuration or cache functionality is not ideal as its only when the first request comes through the pipeline will the call be wrapped in
@@ -38,7 +38,7 @@ Download and reference the release DLL file in your project.
 
 In your Startup.cs file add the following namespace.
 ```C#
-using AspNetCore.Impersonation;
+using AspNETCore.Impersonation;
 ```
 
 In your Startup.cs file add the following code below to the function 'Configure'. 
@@ -47,14 +47,14 @@ ImpersonateFunction.Run('Your Function Here', env);
 ```
 
 ## Middleware Plugin
-The middleware plugin allows you to impersonate a different user in the ASP.Net Core pipeline. 
+The middleware plugin allows you to impersonate a different user in the ASP.NET Core pipeline. 
 
 ### Getting Started
 Download and reference the release DLL file in your project.
 
 In your Startup.cs file add the following namespace.
 ```C#
-using AspNetCore.Impersonation;
+using AspNETCore.Impersonation;
 ```
 
 In your Startup.cs file add the following code below to the function 'Configure', it must be right at the start of the function before any of the pipeline calls.

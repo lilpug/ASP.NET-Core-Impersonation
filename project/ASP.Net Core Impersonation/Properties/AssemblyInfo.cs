@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("impersonation_middleware")]
+[assembly: AssemblyProduct("Impersonation")]
 [assembly: AssemblyCopyright("Copyright ©  2017 David Whitehead, MIT")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
