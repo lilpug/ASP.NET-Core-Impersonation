@@ -7,8 +7,8 @@
     <ProjectGuid>{232A3510-0C1D-4150-BFD7-9B6F2CD8FA22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>impersonation_middleware</RootNamespace>
-    <AssemblyName>impersonation_middleware</AssemblyName>
+    <RootNamespace>Impersonation</RootNamespace>
+    <AssemblyName>Impersonation</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -232,9 +232,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="lib\load.cs" />
-    <Compile Include="lib\pipeline.cs" />
-    <Compile Include="lib\variables.cs" />
+    <Compile Include="..\..\lib\function\core.cs">
+      <Link>lib\function\core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\lib\function\variables.cs">
+      <Link>lib\function\variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\lib\middleware\load.cs">
+      <Link>lib\middleware\load.cs</Link>
+    </Compile>
+    <Compile Include="..\..\lib\middleware\pipeline.cs">
+      <Link>lib\middleware\pipeline.cs</Link>
+    </Compile>
+    <Compile Include="..\..\lib\middleware\variables.cs">
+      <Link>lib\middleware\variables.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

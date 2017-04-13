@@ -15,6 +15,9 @@ namespace AspNetCore.Impersonation
 
             //Checks if the value is a valid boolean and if its true, otherwise just passes the call on and does not wrap it in impersonation
             if (
+                //Checks the file exists with the information before we continue to check if its valid
+                shouldRunImpersonation &&
+
                 //Checks the value is a valid boolean and that its true
                 bool.TryParse(Configuration.GetSection("impersonation:is_enabled").Value, out bool isEnabled) && isEnabled &&
 

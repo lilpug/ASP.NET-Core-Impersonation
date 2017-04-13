@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "impersonation_middleware", "impersonation_middleware\impersonation_middleware.csproj", "{232A3510-0C1D-4150-BFD7-9B6F2CD8FA22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.Net Core Impersonation", "ASP.Net Core Impersonation\ASP.Net Core Impersonation.csproj", "{232A3510-0C1D-4150-BFD7-9B6F2CD8FA22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

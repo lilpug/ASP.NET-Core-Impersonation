@@ -1,23 +1,16 @@
-## ASP.Net Core Impersonation Middleware Plugin
-the middleware plugin always users to impersonate a different user in the ASP.Net pipeline. 
+# ASP.Net Core Impersonation
 
-It is for the ASP.Net (.Net Framework) version only.
+**This library is for the ASP.Net Core (.Net Framework 4.6+) version only, this is because its using the advapi32.dll for the impersonation.**
 
-## Getting Started
-Download and reference the release DLL file in your project.
+The library gives the ability to impersonate a user at either a function level or a middleware level. If the impersonation configuration file does not exist it will simply run the function and middleware as the underlining user. 
+This can be quite useful if you want to impersonate at a local dev level but then when you push to product you want it to run as the application pool user. To acheive this the only thing you need to do is to exclude publishing the impersonation configruation file to the product server or delete the file on it. By doing this
+it helps to maintain security as your not pushing credentials in a file onto a product server only in your local enviroment.
 
-In your Startup.cs file add the following namespace.
-```C#
-using AspNetCore.Impersonation;
-```
 
-In your Startup.cs file add the following code below to the function Configure, it must be right at the start of the function before any of the pipeline calls.
-```C#
-app.UseMiddleware<Impersonate>(env);
-```
+## Impersonation Configuration File Structure
+The library will look for a "impersonation.json" file by default that should be located at the root of the project, it is possible to change the name of the configuration file in the function and middleware if required.
 
-The plugin will look for a "impersonation.json" file by default that should be located at the root of the project.
-build the configuration file "impersonation.json" in the root of the directory with the following structure:-
+To Get started you will need to build the configuration file "impersonation.json" in the root of the directory for your project with the following structure:-
 ```json
 {
   "impersonation": {
@@ -31,20 +24,55 @@ build the configuration file "impersonation.json" in the root of the directory w
 }
 ```
 
-now simply change the is_enabled flag to true and put your credentials you want to impersonate on ASP.Net Core.
+Note: if the is_enabled flag is set to false it will not attempt to run the impersonation with the credentials supplied.
+
+## Middleware Function
+The middleware function allows you to impersonate a different user when you run a particular function in ASP.Net Core. 
+
+The main purpose of the function is to help with loading possible configuration and caching functions in the Startup.cs file without having to create a middleware plugin to try and achieve this. 
+using a middleware plugin to try and load a one time configuration or cache fucntionality is not really ideal as its only when the first request comes through the pipeline will the call be wrapped in
+an impersonation level. This would also mean you need to wrap the middleware in a static flag to determine if its already been run once and to ignore it in all future requests.
+
+### Getting Started
+Download and reference the release DLL file in your project.
+
+In your Startup.cs file add the following namespace.
+```C#
+using AspNetCore.Impersonation;
+```
+
+In your Startup.cs file add the following code below to the function 'Configure'. 
+```C#
+ImpersonateFunction.Run('Your Function Here', env);
+```
+
+## Middleware Plugin
+The middleware plugin allows you to impersonate a different user in the ASP.Net Core pipeline. 
+
+### Getting Started
+Download and reference the release DLL file in your project.
+
+In your Startup.cs file add the following namespace.
+```C#
+using AspNetCore.Impersonation;
+```
+
+In your Startup.cs file add the following code below to the function 'Configure', it must be right at the start of the function before any of the pipeline calls.
+```C#
+app.UseMiddleware<Impersonate>(env);
+```
 
 ### Extra Options
-The impersonation plugin constructor looks like the following:-
+The middleware plugin constructor looks like the following:-
 
 ```C#
-public Impersonate(RequestDelegate next, IHostingEnvironment env, string filename = "impersonation.json", bool createNoneExistStructure = false, bool throwError = false)
+public Impersonate(RequestDelegate next, IHostingEnvironment env, string filename = "impersonation.json", bool throwError = false)
 ```
 
 The constructor parameters are used as followed:-
 
 * env: this is the enviroment which is used on the startup.cs configure function
 * filename: by default this is "impersonation.json" but you can change it to a different name if required
-* createNoneExistStructure: This creates the json file at the root of the project if it does not exist, by default it does not do it
 * throwError: if there is an exception i.e. login failure etc this tells it to throw the exception rather than just ignore it, can be good for debugging
 
 ## Copyright and License
