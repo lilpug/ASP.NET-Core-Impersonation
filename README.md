@@ -3,8 +3,8 @@
 **This library is for the ASP.Net Core (.Net Framework 4.6+) version only, this is because its using the advapi32.dll for the impersonation.**
 
 The library gives the ability to impersonate a user at either a function level or a middleware level. If the impersonation configuration file does not exist it will simply run the function and middleware as the underlining user. 
-This can be quite useful if you want to impersonate at a local dev level but then when you push to product you want it to run as the application pool user. To acheive this the only thing you need to do is to exclude publishing the impersonation configruation file to the product server or delete the file on it. By doing this
-it helps to maintain security as your not pushing credentials in a file onto a product server only in your local enviroment.
+This can be quite useful if you want to impersonate at a local dev level but then when you push to product you want it to run as the application pool user. To achieve this the only thing, you need to do is to exclude publishing the impersonation configuration file to the product server or delete the file on it. By doing this
+it helps to maintain security as you’re not pushing credentials in a file onto a product server only in your local environment.
 
 
 ## Impersonation Configuration File Structure
@@ -27,11 +27,11 @@ To Get started you will need to build the configuration file "impersonation.json
 Note: if the is_enabled flag is set to false it will not attempt to run the impersonation with the credentials supplied.
 
 ## Middleware Function
-The middleware function allows you to impersonate a different user when you run a particular function in ASP.Net Core. 
+The middleware function allows you to impersonate a different user when you run a supplied function in ASP.Net Core. 
 
 The main purpose of the function is to help with loading possible configuration and caching functions in the Startup.cs file without having to create a middleware plugin to try and achieve this. 
-using a middleware plugin to try and load a one time configuration or cache fucntionality is not really ideal as its only when the first request comes through the pipeline will the call be wrapped in
-an impersonation level. This would also mean you need to wrap the middleware in a static flag to determine if its already been run once and to ignore it in all future requests.
+using a middleware plugin to try and load a onetime configuration or cache functionality is not ideal as its only when the first request comes through the pipeline will the call be wrapped in
+an impersonation level. This would also mean you need to wrap the middleware in a static flag to determine if it’s already been run once and to ignore it in all future requests.
 
 ### Getting Started
 Download and reference the release DLL file in your project.
@@ -63,17 +63,17 @@ app.UseMiddleware<Impersonate>(env);
 ```
 
 ### Extra Options
-The middleware plugin constructor looks like the following:-
+The middleware plugin constructor looks like the following: -
 
 ```C#
 public Impersonate(RequestDelegate next, IHostingEnvironment env, string filename = "impersonation.json", bool throwError = false)
 ```
 
-The constructor parameters are used as followed:-
+The constructor parameters are used as followed: -
 
-* env: this is the enviroment which is used on the startup.cs configure function
+* env: this is the environment which is used on the startup.cs configure function
 * filename: by default this is "impersonation.json" but you can change it to a different name if required
-* throwError: if there is an exception i.e. login failure etc this tells it to throw the exception rather than just ignore it, can be good for debugging
+* throwError: if there is an exception i.e. login failure etc. this tells it to throw the exception rather than just ignore it, can be good for debugging
 
 ## Copyright and License
 Copyright &copy; 2017 David Whitehead
