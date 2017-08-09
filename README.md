@@ -4,6 +4,10 @@ ASP.NET Core Impersonation is a .NET library that gives the ability to impersona
 
 **This library is for the ASP.NET Core (.NET Framework 4.6+) version only, this is due to the library utilising the advapi32.dll for the internal impersonation capability.**
 
+
+[![NuGet](https://img.shields.io/nuget/v/AspNetCore.Impersonation.svg?maxAge=3600)](https://www.nuget.org/packages/AspNetCore.Impersonation/)
+
+
 <br />
 
 ## Getting Started
